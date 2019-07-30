@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Potrero extends Model
 {
     protected $table = 'potreros';
+    protected $primaryKey = 'ID_potrero';
     public $timestamps = false;
 
     public function predio()
@@ -17,7 +18,7 @@ class Potrero extends Model
 
     public function disponibilidades()
     {
-        return $this->hasMany(Disponibilidad::class, 'ID_potrero');
+        return $this->hasMany(Disponibilidad::class, $this->primaryKey);
 
     }
 }

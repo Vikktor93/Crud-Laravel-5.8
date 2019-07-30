@@ -41,21 +41,20 @@ class InicioController extends Controller
     {
         //Utilizando ORM
         $user = User::find('17654123-3');
-        $potreros = Potrero::join('predios','predios.ID_Predio', '=', 'potreros.ID_Predio')
-        ->join('disponibilidads', 'disponibilidads.ID_potrero', '=', 'potreros.ID_potrero')
-        ->select('disponibilidads.fecha','disponibilidads.ndvi','potreros.ID_potrero', 'potreros.superficie', 'predios.RUT_usuario')
-        ->where('predios.RUT_usuario', '=', $user->RUT_usuario)
-        ->orderBy('disponibilidads.fecha', 'desc')
-        ->with('disponibilidades')
-        ->get('potreros.*');
+        $potreros = Potrero::join('predios','predios.ID_Predio', '=', 'potreros.ID_Predio')->join('disponibilidads', 'disponibilidads.ID_potrero', '=', 'potreros.ID_potrero')->select('disponibilidads.fecha','disponibilidads.ndvi','potreros.ID_potrero', 'potreros.superficie', 'predios.RUT_usuario')->where('predios.RUT_usuario', '=', $user->RUT_usuario)->orderBy('disponibilidads.fecha', 'desc')->with('disponibilidades')->get('potreros.*');
         return view('tabla3', compact('user','potreros'));
     }
 
     public function ndviview()
     {
-        //Utilizando ORM
-        $ndvis = Potrero::all();
-        return view('tabla4', compact('ndvis'));
+        //Utilizando ORM - solo imprime mayor valor
+        $user = User::find('17654123-3');
+        $potreros = Potrero::join('predios','predios.ID_Predio', '=', 'potreros.ID_Predio')
+        ->join('disponibilidads', 'disponibilidads.ID_potrero', '=', 'potreros.ID_potrero')
+        ->where('predios.RUT_usuario', '=', $user->RUT_usuario)
+        ->with('disponibilidades')
+        ->max('ndvi');
+        return view('tabla4', compact('user','potreros'));
     }
 
     /**
