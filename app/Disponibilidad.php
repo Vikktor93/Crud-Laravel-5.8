@@ -10,9 +10,9 @@ class Disponibilidad extends Model
     public $timestamps = false;
 
 
-    public function potrero()
+    public function potreros()
     {
-        return $this->belongsTo(Potreros::class, 'ID_potrero');
+        return $this->belongsTo(Potrero::class, 'ID_potrero');
 
     }
 }

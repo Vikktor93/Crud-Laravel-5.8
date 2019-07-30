@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\DB;
 
 use App\User;
 use App\Predio;
-use App\Potreros;
+use App\Potrero;
 use Illuminate\Http\Request;
 
 
@@ -41,19 +41,20 @@ class InicioController extends Controller
     {
         //Utilizando ORM
         $user = User::find('17654123-3');
-        $potreros = Potreros::join('predios','predios.ID_Predio', '=', 'potreros.ID_Predio')
-                    ->join('disponibilidads', 'disponibilidads.ID_potrero', '=', 'potreros.ID_potrero')
-                    ->where('predios.RUT_usuario', '=', $user->RUT_usuario)
-                    ->orderBy('disponibilidads.fecha', 'desc')
-                    ->with('disponibilidad')
-                    ->get('potreros');
+        $potreros = Potrero::join('predios','predios.ID_Predio', '=', 'potreros.ID_Predio')
+        ->join('disponibilidads', 'disponibilidads.ID_potrero', '=', 'potreros.ID_potrero')
+        ->select('disponibilidads.fecha','disponibilidads.ndvi','potreros.ID_potrero', 'potreros.superficie', 'predios.RUT_usuario')
+        ->where('predios.RUT_usuario', '=', $user->RUT_usuario)
+        ->orderBy('disponibilidads.fecha', 'desc')
+        ->with('disponibilidades')
+        ->get('potreros.*');
         return view('tabla3', compact('user','potreros'));
     }
 
     public function ndviview()
     {
         //Utilizando ORM
-        $ndvis = Potreros::all();
+        $ndvis = Potrero::all();
         return view('tabla4', compact('ndvis'));
     }
 

@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Potreros;
+use App\Potrero;
 
 class PotrerosTableSeeder extends Seeder
 {
@@ -12,7 +12,7 @@ class PotrerosTableSeeder extends Seeder
      */
     public function run()
     {
-        Potreros::create([
+        Potrero::create([
             'ID_potrero' => '1',
             'Tipo' => 'Grande',
             'Superficie' => 50,
@@ -20,7 +20,7 @@ class PotrerosTableSeeder extends Seeder
 
         ]);
 
-        Potreros::create([
+        Potrero::create([
             'ID_potrero' => '2',
             'Tipo' => 'Grande',
             'Superficie' => 55.5,
@@ -28,7 +28,7 @@ class PotrerosTableSeeder extends Seeder
 
         ]);
 
-        Potreros::create([
+        Potrero::create([
             'ID_potrero' => '3',
             'Tipo' => 'Mediano',
             'Superficie' => 25.0,
@@ -36,7 +36,7 @@ class PotrerosTableSeeder extends Seeder
 
         ]);
 
-        Potreros::create([
+        Potrero::create([
             'ID_potrero' => '4',
             'Tipo' => 'Mediano',
             'Superficie' => 30.0,

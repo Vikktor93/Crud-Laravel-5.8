@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Potreros extends Model
+class Potrero extends Model
 {
     protected $table = 'potreros';
     public $timestamps = false;
@@ -15,7 +15,7 @@ class Potreros extends Model
 
     }
 
-    public function disponibilidad()
+    public function disponibilidades()
     {
         return $this->hasMany(Disponibilidad::class, 'ID_potrero');
 
