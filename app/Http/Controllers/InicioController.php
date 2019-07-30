@@ -40,8 +40,14 @@ class InicioController extends Controller
     public function potrerosview()
     {
         //Utilizando ORM
-        $potreros = Potreros::all();
-        return view('tabla3', compact('potreros'));
+        $user = User::find('17654123-3');
+        $potreros = Potreros::join('predios','predios.ID_Predio', '=', 'potreros.ID_Predio')
+                    ->join('disponibilidads', 'disponibilidads.ID_potrero', '=', 'potreros.ID_potrero')
+                    ->where('predios.RUT_usuario', '=', $user->RUT_usuario)
+                    ->orderBy('disponibilidads.fecha', 'desc')
+                    ->with('disponibilidad')
+                    ->get('potreros');
+        return view('tabla3', compact('user','potreros'));
     }
 
     public function ndviview()

@@ -6,18 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Disponibilidad extends Model
 {
+    protected $table = 'disponibilidads';
     public $timestamps = false;
-    protected $dates = [
-        'fecha'
-    ];
-    protected $casts = [
-        'fecha' => 'datetime:YY-MM-DD',
-    ];
 
 
     public function potrero()
     {
-        return $this->belongsTo(Potreros::class);
+        return $this->belongsTo(Potreros::class, 'ID_potrero');
 
     }
 }
