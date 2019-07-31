@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Predio extends Model
 {
     protected $table = 'predios';
+    protected $primaryKey = 'ID_Predio';
     public $timestamps = false;
 
     public function users()
@@ -17,7 +18,7 @@ class Predio extends Model
 
     public function subusers()
     {
-        return $this->belongsToMany(Subuser::class, 'predio_subusers', 'ID_Predio', 'RUT_subusuario');
+        return $this->belongsToMany(Subuser::class, 'predio_subusers', $this->primaryKey, 'RUT_subusuario');
 
     }
 

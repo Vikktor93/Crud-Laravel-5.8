@@ -10,7 +10,6 @@ class Subuser extends Model
     protected $table = 'subusers';
     protected $primaryKey = 'RUT_subusuario';
     protected $keyType = 'string';
-    //protected $fillable = ['Rut_subusuario', 'Password', 'Username', 'Firstname', 'Lastname', 'email', 'RUT_usuario'];
     public $timestamps = false;
 
     public function users()

@@ -7,7 +7,7 @@
         <br>
         <ul>
                 <li class="list-group-item list-group-item-dark"><b>Nombre: </b>{{$user->Username}}</li>
-                <li class="list-group-item list-group-item-dark"><b>RUT: </b>{{$user->RUT_usuario}}</li>
+                <li class="list-group-item list-group-item-dark"><b>Rut: </b>{{$user->RUT_usuario}}</li>
                @foreach($potreros as $p)
                     <ul>
                             <li class="list-group-item list-group-item-dark"><b>ID Potrero: </b>{{$p->ID_potrero}}</li>

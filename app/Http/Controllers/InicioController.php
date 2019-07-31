@@ -1,14 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\DB;
 
 use App\User;
 use App\Predio;
 use App\Potrero;
 use Illuminate\Http\Request;
-
-
 
 class InicioController extends Controller
 {
@@ -30,7 +27,7 @@ class InicioController extends Controller
 
     public function prediosview()
     {
-        $predios = Predio::with(['users', 'subusers'])->get();
+        $predios = Predio::with('users', 'subusers')->get();
         return view('tabla2', compact('predios'));
     }
 
