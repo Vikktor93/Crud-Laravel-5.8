@@ -19,42 +19,41 @@ class InicioController extends Controller
      */
     public function index()
     {
-        //Utilizando ORM
         return view('index');
     }
 
     public function usuarios()
     {
-        //Utilizando ORM
         $users = User::with('subusers')->get();
         return view('tabla1', compact('users'));
     }
 
     public function prediosview()
     {
-        //Utilizando ORM
         $predios = Predio::with(['users', 'subusers'])->get();
         return view('tabla2', compact('predios'));
     }
 
     public function potrerosview()
     {
-        //Utilizando ORM
         $user = User::find('17654123-3');
-        $potreros = Potrero::join('predios','predios.ID_Predio', '=', 'potreros.ID_Predio')->join('disponibilidads', 'disponibilidads.ID_potrero', '=', 'potreros.ID_potrero')->select('disponibilidads.fecha','disponibilidads.ndvi','potreros.ID_potrero', 'potreros.superficie', 'predios.RUT_usuario')->where('predios.RUT_usuario', '=', $user->RUT_usuario)->orderBy('disponibilidads.fecha', 'desc')->with('disponibilidades')->get('potreros.*');
+        $potreros = Potrero::join('predios','predios.ID_Predio', '=', 'potreros.ID_Predio')
+        ->join('disponibilidads', 'disponibilidads.ID_potrero', '=', 'potreros.ID_potrero')
+        ->where('predios.RUT_usuario', '=', $user->RUT_usuario)
+        ->orderBy('fecha', 'desc')
+        ->get();
         return view('tabla3', compact('user','potreros'));
     }
 
     public function ndviview()
     {
-        //Utilizando ORM - solo imprime mayor valor
         $user = User::find('17654123-3');
         $potreros = Potrero::join('predios','predios.ID_Predio', '=', 'potreros.ID_Predio')
         ->join('disponibilidads', 'disponibilidads.ID_potrero', '=', 'potreros.ID_potrero')
-        ->where('predios.RUT_usuario', '=', $user->RUT_usuario)
-        ->with('disponibilidades')
-        ->max('ndvi');
-        return view('tabla4', compact('user','potreros'));
+        ->where('predios.RUT_usuario', '=', $user->RUT_usuario);
+        $ndvimayor = $potreros->orderBy('ndvi','desc')->first();
+
+        return view('tabla4', compact('user','ndvimayor'));
     }
 
     /**
