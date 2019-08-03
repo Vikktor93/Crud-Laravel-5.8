@@ -2,7 +2,7 @@
 @section('contenido')
     <div class="row">
         <div class="col">
-              <center><h3>Lista 1: Usuarios con sus Subusuarios</h3></center>
+              <center><h3>Lista 1: Usuarios con sus Sub Usuarios</h3></center>
               <br>
                         @foreach($users as $user)
                         <ul>
