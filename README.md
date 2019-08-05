@@ -65,3 +65,4 @@ http://localhost:8080
 ### Nota
 Este Crud trabaja con la BD MySQL. Si desea usar otro motor de BD, 
 puede establecer la configuración en **config / database.php**
+# Crud-Laravel-5.8
